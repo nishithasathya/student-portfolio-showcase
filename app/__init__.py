@@ -33,10 +33,12 @@ def create_app(test_config=None):
     from app.auth.routes import bp as auth_bp
     from app.portfolio.routes import bp as portfolio_bp
     from app.public.routes import bp as public_bp
+    from app.views.routes import bp as views_bp
 
     app.register_blueprint(auth_bp)
     app.register_blueprint(portfolio_bp)
     app.register_blueprint(public_bp)
+    app.register_blueprint(views_bp)
 
     register_error_handlers(app)
 

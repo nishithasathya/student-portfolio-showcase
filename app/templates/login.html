@@ -1,0 +1,43 @@
+
+{% extends "base.html" %}
+
+{% block title %}Log in — Student Portfolio Showcase{% endblock %}
+
+{% block content %}
+<section class="auth-page">
+  <div class="auth-card">
+    <p class="eyebrow">STUDENT PORTFOLIO SHOWCASE</p>
+    <h1>Welcome back</h1>
+    <p class="auth-subtitle">Log in to manage your portfolio.</p>
+
+    <form id="login-form" novalidate>
+      <label for="email">Email address</label>
+      <input
+        type="email"
+        id="email"
+        name="email"
+        placeholder="you@example.com"
+        required
+        autocomplete="email"
+      />
+
+      <label for="password">Password</label>
+      <input
+        type="password"
+        id="password"
+        name="password"
+        placeholder="Enter your password"
+        required
+        autocomplete="current-password"
+      />
+
+      <p id="login-message" class="message" hidden></p>
+      <button type="submit">Log in</button>
+    </form>
+
+    <p class="auth-switch">
+      Don't have an account? <a href="/register">Create one</a>
+    </p>
+  </div>
+</section>
+{% endblock %}
