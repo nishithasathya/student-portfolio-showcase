@@ -1,0 +1,159 @@
+
+{% extends "base.html" %}
+
+{% block title %}Edit Portfolio — Student Portfolio Showcase{% endblock %}
+
+{% block nav %}
+<a href="/dashboard">Dashboard</a>
+<button id="logout-button" type="button" class="link-button">Log out</button>
+{% endblock %}
+
+{% block content %}
+<section id="portfolio-editor" class="editor-page">
+
+  <div class="editor-heading">
+    <p class="eyebrow">PORTFOLIO SETTINGS</p>
+    <h1>Edit your portfolio</h1>
+    <p class="editor-subtitle">
+      Keep your information up to date and showcase your work.
+    </p>
+  </div>
+
+  <p id="editor-message" class="message" hidden></p>
+
+  <!-- Profile -->
+  <article class="form-card editor-section">
+    <div class="section-heading">
+      <h2>01. Personal profile</h2>
+      <p>Introduce yourself and tell visitors a little about you.</p>
+    </div>
+
+    <form id="profile-form">
+      <label for="profile-display-name">Display name</label>
+      <input type="text" id="profile-display-name" maxlength="120" required />
+
+      <label for="profile-headline">Headline</label>
+      <input type="text" id="profile-headline" maxlength="200"
+        placeholder="e.g. Computer Science Student | Aspiring Developer" />
+
+      <label for="profile-bio">About me</label>
+      <textarea id="profile-bio" maxlength="4000" rows="5"
+        placeholder="Write a short introduction about yourself..."></textarea>
+
+      <button type="submit">Save profile</button>
+    </form>
+  </article>
+
+  <!-- Publishing -->
+  <article class="form-card editor-section">
+    <div class="section-heading">
+      <h2>02. Publishing settings</h2>
+      <p>Choose whether your portfolio should be visible to everyone.</p>
+    </div>
+
+    <label class="toggle-row">
+      <input type="checkbox" id="publish-toggle" />
+      Publish my portfolio publicly
+    </label>
+
+    <div class="public-link-box">
+      <span>YOUR PORTFOLIO LINK</span>
+      <p>
+        <a id="public-link" href="#" target="_blank" rel="noopener"></a>
+      </p>
+    </div>
+  </article>
+
+  <!-- Skills -->
+  <article class="form-card editor-section">
+    <div class="section-heading">
+      <h2>03. Skills</h2>
+      <p>Add the skills and technologies you are familiar with.</p>
+    </div>
+
+    <form id="skill-form" class="inline-form">
+      <input type="text" name="name" placeholder="Skill name" required maxlength="80" />
+      <input type="text" name="category" placeholder="Category (optional)" maxlength="80" />
+      <input type="text" name="proficiency"
+        placeholder="Proficiency (optional)" maxlength="40" />
+      <button type="submit">Add skill</button>
+    </form>
+
+    <ul id="skills-list" class="entry-list"></ul>
+  </article>
+
+  <!-- Projects -->
+  <article class="form-card editor-section">
+    <div class="section-heading">
+      <h2>04. Projects</h2>
+      <p>Showcase projects you have built or contributed to.</p>
+    </div>
+
+    <form id="project-form" class="stacked-form">
+      <label for="project-title">Project title</label>
+      <input type="text" id="project-title" name="title"
+        placeholder="e.g. Student Management System" required maxlength="150" />
+
+      <label for="project-description">Description</label>
+      <textarea id="project-description" name="description"
+        placeholder="What does your project do?" rows="3"></textarea>
+
+      <label for="project-technologies">Technologies used</label>
+      <input type="text" id="project-technologies" name="technologies"
+        placeholder="e.g. Python, Flask, MySQL" maxlength="300" />
+
+      <label for="project-repo">Repository URL</label>
+      <input type="url" id="project-repo" name="repo_url"
+        placeholder="https://..." />
+
+      <label for="project-demo">Demo URL (optional)</label>
+      <input type="url" id="project-demo" name="demo_url"
+        placeholder="https://..." />
+
+      <button type="submit">Add project</button>
+    </form>
+
+    <ul id="projects-list" class="entry-list"></ul>
+  </article>
+
+  <!-- Achievements -->
+  <article class="form-card editor-section">
+    <div class="section-heading">
+      <h2>05. Achievements &amp; certifications</h2>
+      <p>Highlight your accomplishments, awards and certifications.</p>
+    </div>
+
+    <form id="achievement-form" class="stacked-form">
+      <label for="achievement-title">Title</label>
+      <input type="text" id="achievement-title" name="title"
+        placeholder="Achievement or certification name" required maxlength="150" />
+
+      <label for="achievement-issuer">Issuer</label>
+      <input type="text" id="achievement-issuer" name="issuer"
+        placeholder="Organisation or institution (optional)" maxlength="150" />
+
+      <label for="achievement-date">Date awarded</label>
+      <input type="date" id="achievement-date" name="awarded_on" />
+
+      <label for="achievement-url">Credential URL (optional)</label>
+      <input type="url" id="achievement-url" name="credential_url"
+        placeholder="https://..." />
+
+      <label for="achievement-type">Type</label>
+      <select id="achievement-type" name="type">
+        <option value="achievement">Achievement</option>
+        <option value="certification">Certification</option>
+      </select>
+
+      <button type="submit">Add achievement</button>
+    </form>
+
+    <ul id="achievements-list" class="entry-list"></ul>
+  </article>
+
+  <div class="editor-footer">
+    <a href="/dashboard">← Back to dashboard</a>
+  </div>
+
+</section>
+{% endblock %}
