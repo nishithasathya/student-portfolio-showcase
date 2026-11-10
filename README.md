@@ -7,10 +7,12 @@ Technology Stack
 
 * Python 3.11
 * Flask, Flask-SQLAlchemy, Flask-Login
-* SQLite
+* SQLite locally, PostgreSQL on Render
+* Gunicorn (production server)
 * pytest
 * Ruff
 * GitHub Actions
+* Render (deployment)
 
 Current Features
 
@@ -67,7 +69,15 @@ ruff check .
 
 Continuous Integration
 
-GitHub Actions runs code-quality checks and automated tests on pushes to main and pull requests targeting main.
+GitHub Actions runs code-quality checks and automated tests on pushes to main and pull requests targeting main. The workflow file is unchanged: `.github/workflows/ci.yml`.
+
+See [`docs/CICD_EXPLANATION.md`](docs/CICD_EXPLANATION.md) for how CI relates to delivery, and how to demonstrate a passing and a failing run.
+
+Deployment
+
+Production is configured for Render in `render.yaml` and `Procfile`. The app is served with Gunicorn and uses PostgreSQL when `DATABASE_URL` is set. Local runs still use SQLite.
+
+See [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md) for the one-time Render setup, environment variables, and the post-deploy checklist. Record the live URL here after the first successful deploy.
 
 Team Development
 
