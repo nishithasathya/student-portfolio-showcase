@@ -6,19 +6,25 @@ A web application for students to showcase projects, explore peer portfolios, an
 Technology Stack
 
 * Python 3.11
-* Flask
-* SQLite (planned)
+* Flask, Flask-SQLAlchemy, Flask-Login
+* SQLite
 * pytest
 * Ruff
 * GitHub Actions
 
 Current Features
 
-* Basic Flask application
+* Registration, login and logout (hashed passwords, session auth)
+* Owner-managed profile, skills, projects and achievements/certifications
+* Portfolio publish/unpublish and a public read-only view at `/p/<slug>`
+* Server-side ownership checks on every write (SPS-SEC-002)
 * Application health-check endpoint
 * Automated tests
 * Automated code-quality checks
 * Continuous integration using GitHub Actions
+
+See [`docs/API_CONTRACT.md`](docs/API_CONTRACT.md) for the full endpoint
+reference used by the frontend and test suite.
 
 Project Structure
 
