@@ -77,7 +77,9 @@ Deployment
 
 Production is configured for Render in `render.yaml` and `Procfile`. The app is served with Gunicorn and uses PostgreSQL when `DATABASE_URL` is set. Local runs still use SQLite.
 
-See [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md) for the one-time Render setup, environment variables, and the post-deploy checklist. Record the live URL here after the first successful deploy.
+Live URL: https://student-portfolio-showcase.onrender.com
+
+See [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md) for the one-time Render setup, environment variables, and the post-deploy checklist.
 
 Team Development
 
