@@ -8,7 +8,7 @@ URL_RE = re.compile(r"^https?://\S+$")
 
 
 def require_fields(data, fields):
-    missing = [f for f in fields if not data.get(f)]
+    missing = [f for f in fields if data.get(f) is None or data.get(f) == ""]
     if missing:
         raise ValidationError(f"Missing required field(s): {', '.join(missing)}")
 
