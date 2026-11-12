@@ -1,7 +1,10 @@
 # student-portfolio-showcase
 Student Portfolio Showcase — SE Lab Jackfruit Problem
 
-A web application for students to showcase projects, explore peer portfolios, and endorse other students’ work.
+A full-stack web application where a student registers, builds a portfolio
+(profile, skills, projects, achievements/certifications), and publishes it
+at a public, shareable URL. Visitors can view a published portfolio;
+editing is restricted to its owner.
 
 Technology Stack
 
@@ -9,33 +12,49 @@ Technology Stack
 * Flask, Flask-SQLAlchemy, Flask-Login
 * SQLite locally, PostgreSQL on Render
 * Gunicorn (production server)
-* pytest
-* Ruff
+* HTML / CSS / JavaScript (Jinja2 templates, no frontend framework)
+* pytest, Ruff
 * GitHub Actions
 * Render (deployment)
 
 Current Features
 
 * Registration, login and logout (hashed passwords, session auth)
-* Owner-managed profile, skills, projects and achievements/certifications
-* Portfolio publish/unpublish and a public read-only view at `/p/<slug>`
+* Registration/login pages, a dashboard, and a portfolio editor (profile,
+  skills, projects, achievements/certifications)
+* Portfolio publish/unpublish and a public read-only page at `/u/<slug>`
+  (backed by the JSON API at `/p/<slug>`)
 * Server-side ownership checks on every write (SPS-SEC-002)
 * Application health-check endpoint
-* Automated tests
-* Automated code-quality checks
-* Continuous integration using GitHub Actions
-
-See [`docs/API_CONTRACT.md`](docs/API_CONTRACT.md) for the full endpoint
-reference used by the frontend and test suite.
+* 58 automated tests covering auth, CRUD, access control, security
+  hygiene and persistence (see [`docs/API_CONTRACT.md`](docs/API_CONTRACT.md)
+  for the endpoint reference, and "Known limitations" below for test
+  coverage that is *not* included)
+* Automated code-quality checks (Ruff)
+* Continuous integration using GitHub Actions, with branch protection on
+  `main` requiring a passing check and 1 approving review
+* Live deployment on Render with a PostgreSQL database
 
 Project Structure
 
-app/                     Flask application
-tests/                   Automated tests
-.github/workflows/       GitHub Actions workflows
-run.py                   Application entry point
-requirements.txt          Python dependencies
-pyproject.toml            Tool configuration
+app/
+  models/                SQLAlchemy models (User, Portfolio, Skill, Project, Achievement)
+  auth/                  Register / login / logout routes
+  portfolio/             Profile, skills, projects, achievements, publish — owner-only CRUD
+  public/                Public JSON view of a published portfolio (/p/<slug>)
+  views/                 Page routes that render the templates below
+  templates/             Jinja2 page shells (register, login, dashboard, editor, public page)
+  static/css, static/js  Styling and the frontend's API client + page logic
+  validators.py, errors.py, extensions.py, __init__.py (app factory)
+tests/                   58 automated tests (pytest)
+docs/                    SRS, SAD, STP, API contract, CI/CD and deployment docs
+.github/workflows/       GitHub Actions CI workflow
+instance/                Local SQLite database (git-ignored)
+run.py                   Local development entry point
+Procfile, render.yaml    Production deployment config (Render)
+.env.example             Documents SECRET_KEY / DATABASE_URL (never commit real values)
+requirements.txt         Python dependencies
+pyproject.toml           pytest / Ruff configuration
 
 Local Setup
 
@@ -80,6 +99,15 @@ Production is configured for Render in `render.yaml` and `Procfile`. The app is 
 Live URL: https://student-portfolio-showcase.onrender.com
 
 See [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md) for the one-time Render setup, environment variables, and the post-deploy checklist.
+
+Known Limitations
+
+See [`docs/FINAL_EVALUATION.md`](docs/FINAL_EVALUATION.md) for the full
+test summary, requirement traceability and honestly-documented gaps
+(frontend has no automated tests of its own, no rate limiting on login,
+performance/accessibility/compatibility were reviewed manually rather
+than automated, and the TC-CI-02 intentional-failure demo has not been
+run).
 
 Team Development
 
